@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PracticaSqlLite</string>
+    <string name="registrar">registrar</string>
+    <string name="buscar">buscar</string>
+    <string name="modificar">modificar</string>
+    <string name="eliminar">eliminar</string>
+    <string name="codigo">codigo</string>
+</resources>

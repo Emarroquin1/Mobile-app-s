@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="376dp"
+        android:layout_height="517dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.49"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.123">
+    <EditText
+        android:id="@+id/txt_codigo"
+        android:layout_width="293dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:hint="Codigo del producto"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent" />
+    <EditText
+        android:id="@+id/txt_descripcion"
+        android:layout_width="296dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Descripcion"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_codigo" />
+    <EditText
+        android:id="@+id/txt_precio"
+        android:layout_width="293dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Precio"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_descripcion"
+        />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:onClick="Registrar"
+        android:text="@string/registrar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_precio" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+    android:layout_marginStart="36dp"
+    android:layout_marginTop="4dp"
+    android:onClick="Buscar"
+    android:text="@string/buscar"
+    app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:onClick="Modificar"
+        android:text="@string/modificar"
+        app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
+        android:onClick="Eliminar"
+        android:text="@string/eliminar"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="264dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="4dp"
+            android:onClick="Consulta"
+            android:text="Consulta"
+            app:layout_constraintStart_toStartOf="parent" />
+</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
