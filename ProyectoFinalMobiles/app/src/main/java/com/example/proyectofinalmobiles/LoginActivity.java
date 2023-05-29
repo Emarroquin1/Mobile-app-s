@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                         Usuario usuario = obtenerUsuario(usuarioId);
 
                         // Crear el Intent para iniciar la MainActivity
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, ActivityDificultad.class);
 
                         // Pasar los datos del usuario al Intent
                         intent.putExtra("nombre", usuario.getNombre());

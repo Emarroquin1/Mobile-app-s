@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityDificultad">
+
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00B0FF"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textViewNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre: "
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewApodo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apodo: " />
+
+        <TextView
+            android:id="@+id/textViewPuntos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Puntos: " />
+
+        <TextView
+            android:layout_width="331dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-100dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="SELECCIONE UNA DIFICULTAD"
+            android:textSize="40sp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/btnEasy"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="18dp"
+            android:backgroundTint="#5F9A50"
+            android:text="@string/facil"
+            android:onClick="Easy"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnIntermediate"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#DCB838"
+            android:text="Intermedio"
+            android:onClick="Intermediate"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnHard"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#CC3636"
+            android:text="@string/dificil"
+            android:onClick="Hard"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

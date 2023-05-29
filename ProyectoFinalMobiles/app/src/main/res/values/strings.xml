@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProyectoFinalMobiles</string>
+    <string name="facil">facil</string>
+    <string name="dificil">Dificil</string>
 </resources>

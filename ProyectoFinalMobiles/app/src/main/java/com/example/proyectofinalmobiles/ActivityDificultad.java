@@ -6,46 +6,25 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-
-    private Button buttonMundo1;
-    private Button buttonPregunta1;
-    private TextView textViewPregunta;
+public class ActivityDificultad extends AppCompatActivity {
     private AdminSQLiteOpenHelper dbHelper;
 
-    private List<Pregunta> listaPreguntas;
-    private List<Respuesta> listaRespuesta;
 
-    private List<Mundo> listaMundos;
-    private static MainActivity instance;
-    int puntosMundo=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_dificultad);
 
-        buttonMundo1 = findViewById(R.id.buttonMundo1);
-        buttonPregunta1 = findViewById(R.id.buttonPregunta1);
-        ListView listViewRespuestas = findViewById(R.id.listViewRespuestas);
-
-        textViewPregunta = findViewById(R.id.textViewPregunta);
         dbHelper = new AdminSQLiteOpenHelper(this, "miBaseDeDatos", null, 1);
-
-
         dbHelper.borrarRegistros();
         insertarDatos();
-
         // Obtener los datos del Intent
         Intent intent = getIntent();
         String nombre = intent.getStringExtra("nombre");
@@ -58,111 +37,34 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewApodo = findViewById(R.id.textViewApodo);
         TextView textViewPuntos = findViewById(R.id.textViewPuntos);
 
+        Button btnEasy = findViewById(R.id.btnEasy);
+
 
         textViewNombre.setText(nombre);
         textViewApodo.setText(apodo);
         textViewPuntos.setText(String.valueOf(puntos));
-        instance = this;
-buttonMundo1.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
 
-        int mundoId = 1; // Establece el ID del mundo deseado
 
-        puntosMundo = dbHelper.obtenerPuntosMundo(mundoId);
-
-        if (puntosMundo != -1) {
-            Toast.makeText(MainActivity.this, "Puntos que puedes ganar en el mundo: " + puntosMundo, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(MainActivity.this, "No se encontraron puntos para el mundo especificado", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-});
-/*
-        String registros = dbHelper.obtenerRegistros("Pregunta");
-        listaPreguntas = new ArrayList<>();
-        int mundoId = 1; // Aquí debes establecer el ID del mundo deseado
-        listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(mundoId); //lista de preguntas con su respectiva respuestas
-
-        int nivelId = 1; // Aquí debes establecer el ID del mundo deseado
-        listaMundos = dbHelper.obtenerMundosPorNivel(mundoId); //lista de preguntas con su respectiva respuestas
-*/buttonPregunta1.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        int mundoId = 1; // Establece el ID del mundo deseado
-
-        listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(mundoId);
-
-        if (!listaPreguntas.isEmpty()) {
-            Pregunta primeraPregunta = listaPreguntas.get(0);
-            textViewPregunta.setText(primeraPregunta.getEnunciado());
-
-            listaRespuesta = primeraPregunta.getRespuestas();
-            RespuestaAdapter respuestaAdapter = new RespuestaAdapter(MainActivity.this, R.layout.item_respuesta, listaRespuesta);
-
-            listViewRespuestas.setAdapter(respuestaAdapter);
-        }
-    }
-});
-        listViewRespuestas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        btnEasy.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Respuesta respuesta = listaRespuesta.get(position);
+            public void onClick(View v) {
 
-                if (respuesta.esCorrecta()) {
-                    Toast.makeText(MainActivity.this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
-                    TextView textViewPuntos = findViewById(R.id.textViewPuntos);
-                    Integer puntos = Integer.parseInt(textViewPuntos.getText().toString());
+                Intent intent = new Intent(ActivityDificultad.this, ActivityMundos.class);
 
-                    if(puntos<5){
-                        actualizarExperiencia(true);
-                    }else{
-                        Toast.makeText(MainActivity.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
-                    }
+                // Enviar Id del mundo facil
+
+                intent.putExtra("idDificultad", 1);
+                // Iniciar la MainActivity
+                startActivity(intent);
+                finish();
 
 
 
-                } else {
-                    Toast.makeText(MainActivity.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
-                    actualizarExperiencia(false);
-                }
             }
         });
 
     }
 
-
-    private void actualizarExperiencia(boolean respuestaCorrecta) {
-        int usuarioId = getIntent().getIntExtra("id", 0);
-
-        // Obtener los puntos y apodo actuales del usuario
-        Experiencia experiencia = dbHelper.obtenerExperienciaPorUsuarioId(usuarioId);
-        int puntos = experiencia.getPunto();
-        String apodo = experiencia.getApodo();
-
-        // Actualizar los puntos según la respuesta
-        if (respuestaCorrecta) {
-            puntos += 1; // Sumar 1 punto
-        } else {
-            puntos -= 1; // Restar 1 punto
-        }
-
-        // Actualizar la experiencia en la base de datos
-        dbHelper.actualizarExperiencia(usuarioId, puntos, apodo);
-
-        // Actualizar el TextView de los puntos en la interfaz
-        TextView textViewPuntos = findViewById(R.id.textViewPuntos);
-        textViewPuntos.setText(String.valueOf(puntos));
-    }
-
-    public void actualizarPuntos(int puntos) {
-        TextView textViewPuntos = findViewById(R.id.textViewPuntos);
-        textViewPuntos.setText(String.valueOf(puntos));
-    }
-    public static MainActivity getInstance() {
-        return instance;
-    }
     private void insertarDatos() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
