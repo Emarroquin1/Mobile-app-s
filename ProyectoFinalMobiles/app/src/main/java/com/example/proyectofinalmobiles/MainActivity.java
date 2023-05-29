@@ -2,31 +2,166 @@ package com.example.proyectofinalmobiles;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button buttonMundo1;
+    private Button buttonPregunta1;
+    private TextView textViewPregunta;
     private AdminSQLiteOpenHelper dbHelper;
 
+    private List<Pregunta> listaPreguntas;
+    private List<Respuesta> listaRespuesta;
+    private List<Mundo> listaMundos;
+    private static MainActivity instance;
+    int puntosMundo=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        buttonMundo1 = findViewById(R.id.buttonMundo1);
+        buttonPregunta1 = findViewById(R.id.buttonPregunta1);
+        ListView listViewRespuestas = findViewById(R.id.listViewRespuestas);
+
+        textViewPregunta = findViewById(R.id.textViewPregunta);
         dbHelper = new AdminSQLiteOpenHelper(this, "miBaseDeDatos", null, 1);
 
 
         dbHelper.borrarRegistros();
         insertarDatos();
 
+        // Obtener los datos del Intent
+        Intent intent = getIntent();
+        String nombre = intent.getStringExtra("nombre");
+        String apodo = intent.getStringExtra("apodo");
+        int puntos = intent.getIntExtra("puntos", 0);
+        int id = intent.getIntExtra("id", 0);
+
+        // Mostrar los datos en tus TextViews u otros elementos de la interfaz
+        TextView textViewNombre = findViewById(R.id.textViewNombre);
+        TextView textViewApodo = findViewById(R.id.textViewApodo);
+        TextView textViewPuntos = findViewById(R.id.textViewPuntos);
 
 
+        textViewNombre.setText(nombre);
+        textViewApodo.setText(apodo);
+        textViewPuntos.setText(String.valueOf(puntos));
+        instance = this;
+buttonMundo1.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+
+        int mundoId = 1; // Establece el ID del mundo deseado
+
+        puntosMundo = dbHelper.obtenerPuntosMundo(mundoId);
+
+        if (puntosMundo != -1) {
+            Toast.makeText(MainActivity.this, "Puntos que puedes ganar en el mundo: " + puntosMundo, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(MainActivity.this, "No se encontraron puntos para el mundo especificado", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+});
+/*
         String registros = dbHelper.obtenerRegistros("Pregunta");
-        Log.d("TAG", registros);
+        listaPreguntas = new ArrayList<>();
+        int mundoId = 1; // Aquí debes establecer el ID del mundo deseado
+        listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(mundoId); //lista de preguntas con su respectiva respuestas
+
+        int nivelId = 1; // Aquí debes establecer el ID del mundo deseado
+        listaMundos = dbHelper.obtenerMundosPorNivel(mundoId); //lista de preguntas con su respectiva respuestas
+*/buttonPregunta1.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        int mundoId = 1; // Establece el ID del mundo deseado
+
+        listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(mundoId);
+
+        if (!listaPreguntas.isEmpty()) {
+            Pregunta primeraPregunta = listaPreguntas.get(0);
+            textViewPregunta.setText(primeraPregunta.getEnunciado());
+
+            listaRespuesta = primeraPregunta.getRespuestas();
+            RespuestaAdapter respuestaAdapter = new RespuestaAdapter(MainActivity.this, R.layout.item_respuesta, listaRespuesta);
+
+            listViewRespuestas.setAdapter(respuestaAdapter);
+        }
+    }
+});
+        listViewRespuestas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Respuesta respuesta = listaRespuesta.get(position);
+
+                if (respuesta.esCorrecta()) {
+                    Toast.makeText(MainActivity.this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
+                    TextView textViewPuntos = findViewById(R.id.textViewPuntos);
+                    Integer puntos = Integer.parseInt(textViewPuntos.getText().toString());
+
+                    if(puntos<5){
+                        actualizarExperiencia(true);
+                    }else{
+                        Toast.makeText(MainActivity.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                } else {
+                    Toast.makeText(MainActivity.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
+                    actualizarExperiencia(false);
+                }
+            }
+        });
+
     }
 
+
+    private void actualizarExperiencia(boolean respuestaCorrecta) {
+        int usuarioId = getIntent().getIntExtra("id", 0);
+
+        // Obtener los puntos y apodo actuales del usuario
+        Experiencia experiencia = dbHelper.obtenerExperienciaPorUsuarioId(usuarioId);
+        int puntos = experiencia.getPunto();
+        String apodo = experiencia.getApodo();
+
+        // Actualizar los puntos según la respuesta
+        if (respuestaCorrecta) {
+            puntos += 1; // Sumar 1 punto
+        } else {
+            puntos -= 1; // Restar 1 punto
+        }
+
+        // Actualizar la experiencia en la base de datos
+        dbHelper.actualizarExperiencia(usuarioId, puntos, apodo);
+
+        // Actualizar el TextView de los puntos en la interfaz
+        TextView textViewPuntos = findViewById(R.id.textViewPuntos);
+        textViewPuntos.setText(String.valueOf(puntos));
+    }
+
+    public void actualizarPuntos(int puntos) {
+        TextView textViewPuntos = findViewById(R.id.textViewPuntos);
+        textViewPuntos.setText(String.valueOf(puntos));
+    }
+    public static MainActivity getInstance() {
+        return instance;
+    }
     private void insertarDatos() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -41,10 +176,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (nivelId != -1) {
             // Insertar registros por defecto en la tabla Mundo
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Suma entre 1 numero', " + nivelId + ")");
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Sumas entre 2 numeros', " + nivelId + ")");
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Resta entre 1 numero', " + nivelId + ")");
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Restas entre 2 numeros', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (5, 'Suma entre 1 numero', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (5, 'Sumas entre 2 numeros', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (5, 'Resta entre 1 numero', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (5, 'Restas entre 2 numeros', " + nivelId + ")");
         }
 
         cursor = db.rawQuery("SELECT id FROM Nivel WHERE nombre = 'Intermedio'", null);
@@ -56,10 +191,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (nivelId != -1) {
             // Insertar registros por defecto en la tabla Mundo relacionados con el nivel intermedio
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Multiplicacion entre 1 numero', " + nivelId + ")");
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Multiplicaciones entre 2 numeros', " + nivelId + ")");
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Division entre 1 numero', " + nivelId + ")");
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Divisiones entre 2 numeros', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (10, 'Multiplicacion entre 1 numero', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (10, 'Multiplicaciones entre 2 numeros', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (10, 'Division entre 1 numero', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (10, 'Divisiones entre 2 numeros', " + nivelId + ")");
         }
         cursor = db.rawQuery("SELECT id FROM Nivel WHERE nombre = 'Dificil'", null);
         nivelId = -1;
@@ -71,10 +206,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (nivelId != -1) {
             // Insertar registros por defecto en la tabla Mundo relacionados con el nivel Dificil
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Multiplicaciones y Sumas', " + nivelId + ")");
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Multiplicaciones y Restas', " + nivelId + ")");
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Divisiones y sumas', " + nivelId + ")");
-            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (0, 'Divisiones y Restas', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (10, 'Multiplicaciones y Sumas', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (10, 'Multiplicaciones y Restas', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (10, 'Divisiones y sumas', " + nivelId + ")");
+            db.execSQL("INSERT INTO Mundo (punto, nombre, nivelId) VALUES (10, 'Divisiones y Restas', " + nivelId + ")");
         }
 
         // Obtener el ID del mundo con nombre 'Suma entre 1 numero'
@@ -694,4 +829,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }

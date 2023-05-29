@@ -1,10 +1,14 @@
 package com.example.proyectofinalmobiles;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public AdminSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -13,6 +17,9 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+
+
 
 
         // Crear tabla Usuario
@@ -49,6 +56,88 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Nivel (nombre) VALUES ('Intermedio')");
         db.execSQL("INSERT INTO Nivel (nombre) VALUES ('Dificil')");
 
+    }
+    public int obtenerPuntosMundo(int mundoId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = { "punto" };
+        String selection = "id = ?";
+        String[] selectionArgs = { String.valueOf(mundoId) };
+
+        Cursor cursor = db.query("Mundo", projection, selection, selectionArgs, null, null, null);
+
+        int puntosMundo = -1;
+        if (cursor.moveToFirst()) {
+            puntosMundo = cursor.getInt(cursor.getColumnIndexOrThrow("punto"));
+        }
+
+        cursor.close();
+        db.close();
+
+        return puntosMundo;
+    }
+
+    public void actualizarExperiencia(int usuarioId, int puntos, String apodo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("punto", puntos);
+        values.put("apodo", apodo);
+
+        String selection = "usuario_id = ?";
+        String[] selectionArgs = { String.valueOf(usuarioId) };
+
+        db.update("Experiencia", values, selection, selectionArgs);
+        db.close();
+
+        // Actualizar el TextView textViewPuntos en MainActivity
+        MainActivity activity = MainActivity.getInstance();
+        if (activity != null) {
+            activity.actualizarPuntos(puntos);
+        }
+    }
+
+    public Experiencia obtenerExperienciaPorUsuarioId(int usuarioId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {"punto", "apodo"};
+        String selection = "usuario_id = ?";
+        String[] selectionArgs = {String.valueOf(usuarioId)};
+
+        Cursor cursor = db.query("Experiencia", projection, selection, selectionArgs, null, null, null);
+
+        Experiencia experiencia = null;
+        if (cursor.moveToFirst()) {
+            int punto = cursor.getInt(cursor.getColumnIndexOrThrow("punto"));
+            String apodo = cursor.getString(cursor.getColumnIndexOrThrow("apodo"));
+            experiencia = new Experiencia(punto, apodo);
+        }
+
+        cursor.close();
+        db.close();
+
+        return experiencia;
+    }
+
+    public List<Mundo> obtenerMundosPorNivel(int nivelId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursorMundos = db.rawQuery("SELECT * FROM Mundo WHERE nivelId = " + nivelId, null);
+
+        List<Mundo> listaMundos = new ArrayList<>();
+
+        if (cursorMundos.moveToFirst()) {
+            do {
+                int mundoId = cursorMundos.getInt(0);
+                int punto = cursorMundos.getInt(1);
+                String nombre = cursorMundos.getString(2);
+                Mundo mundo = new Mundo(mundoId, punto, nombre);
+                listaMundos.add(mundo);
+            } while (cursorMundos.moveToNext());
+        }
+        cursorMundos.close();
+        db.close();
+
+        return listaMundos;
     }
 
     public void borrarRegistros() {
@@ -93,6 +182,41 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         return registros.toString();
     }
+
+    public List<Pregunta> obtenerPreguntasPorMundoId(int mundoId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursorPreguntas = db.rawQuery("SELECT id, enunciado FROM Pregunta WHERE mundoId = ?", new String[]{String.valueOf(mundoId)});
+
+        List<Pregunta> listaPreguntas = new ArrayList<>();
+
+        if (cursorPreguntas.moveToFirst()) {
+            do {
+                int preguntaId = cursorPreguntas.getInt(0);
+                String enunciado = cursorPreguntas.getString(1);
+
+                Pregunta pregunta = new Pregunta(preguntaId, enunciado);
+                listaPreguntas.add(pregunta);
+
+                Cursor cursorRespuestas = db.rawQuery("SELECT * FROM Respuesta WHERE preguntaId = ?", new String[]{String.valueOf(preguntaId)});
+                if (cursorRespuestas.moveToFirst()) {
+                    do {
+                        int respuestaId = cursorRespuestas.getInt(0);
+                        String respuesta = cursorRespuestas.getString(1);
+                        String estado = cursorRespuestas.getString(2);
+
+                        Respuesta respuestaObj = new Respuesta(respuestaId, respuesta, estado);
+                        pregunta.agregarRespuesta(respuestaObj);
+                    } while (cursorRespuestas.moveToNext());
+                }
+                cursorRespuestas.close();
+            } while (cursorPreguntas.moveToNext());
+        }
+        cursorPreguntas.close();
+        db.close();
+
+        return listaPreguntas;
+    }
+
 
     // Método para obtener el último ID insertado en una tabla
     public int getLastInsertedId(SQLiteDatabase db, String tableName) {
