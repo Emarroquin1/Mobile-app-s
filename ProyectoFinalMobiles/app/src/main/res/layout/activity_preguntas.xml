@@ -4,83 +4,161 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00B0FF"
     tools:context=".ActivityPreguntas">
 
-    <TextView
-        android:id="@+id/textViewPregunta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/listViewRespuestas"
-        tools:ignore="NotSibling" />
 
-    <ListView
-        android:id="@+id/listViewRespuestas"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewPregunta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textViewPregunta2" />
+        android:gravity="start"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="10px">
 
-    <TextView
-        android:id="@+id/textViewPregunta2"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textViewNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre:"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnRegresar"
+                android:layout_width="300px"
+                android:layout_height="100px"
+                android:text="Regresar" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/textViewApodo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apodo"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewPuntos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/puntos"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/listViewRespuestas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/listViewRespuestas2"
-        tools:ignore="NotSibling" />
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="2dp">
 
-    <ListView
-        android:id="@+id/listViewRespuestas2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewPregunta2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textViewPregunta3" />
 
-    <TextView
-        android:id="@+id/textViewPregunta3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/listViewRespuestas2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/listViewRespuestas3"
-        tools:ignore="NotSibling" />
 
-    <ListView
-        android:id="@+id/listViewRespuestas3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewPregunta3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textViewPregunta4" />
 
-    <TextView
-        android:id="@+id/textViewPregunta4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/listViewRespuestas3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/listViewRespuestas4"
-        tools:ignore="NotSibling" />
+        <LinearLayout
+            android:id="@+id/encabezado"
+            android:layout_width="411dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/textViewTitulo"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Mundo tematica"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="20dp"
+                />
+        </LinearLayout>
 
-    <ListView
-        android:id="@+id/listViewRespuestas4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewPregunta4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <TextView
+            android:id="@+id/textViewPregunta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="60dp"
+            android:textSize="20sp"
+            tools:ignore="NotSibling" />
+
+        <ListView
+            android:id="@+id/listViewRespuestas"
+            android:layout_width="385dp"
+            android:layout_height="133dp"
+            android:layout_marginStart="16dp"
+            tools:ignore="NotSibling" />
+
+        <TextView
+            android:id="@+id/textViewPregunta2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="20sp"
+            tools:ignore="NotSibling" />
+
+        <ListView
+            android:id="@+id/listViewRespuestas2"
+            android:layout_width="385dp"
+            android:layout_height="133dp"
+            android:layout_marginStart="16dp"
+            tools:ignore="NotSibling" />
+
+        <TextView
+            android:id="@+id/textViewPregunta3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="20sp"
+            tools:ignore="NotSibling" />
+
+        <ListView
+            android:id="@+id/listViewRespuestas3"
+            android:layout_width="385dp"
+            android:layout_height="133dp"
+            android:layout_marginStart="16dp"
+            tools:ignore="NotSibling" />
+
+        <TextView
+            android:id="@+id/textViewPregunta4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="20sp"
+            tools:ignore="NotSibling" />
+
+        <ListView
+            android:id="@+id/listViewRespuestas4"
+            android:layout_width="385dp"
+            android:layout_height="133dp"
+            android:layout_marginStart="16dp"
+            tools:ignore="NotSibling" />
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

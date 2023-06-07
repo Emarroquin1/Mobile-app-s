@@ -2,4 +2,9 @@
     <string name="app_name">ProyectoFinalMobiles</string>
     <string name="facil">facil</string>
     <string name="dificil">Dificil</string>
+    <string name="apodo">apodo</string>
+    <string name="puntos">puntos</string>
+    <string name="inicio_de_sesion">inicio de sesion</string>
+    <string name="dificultad">Dificultad</string>
+    <string name="sexo">sexo</string>
 </resources>

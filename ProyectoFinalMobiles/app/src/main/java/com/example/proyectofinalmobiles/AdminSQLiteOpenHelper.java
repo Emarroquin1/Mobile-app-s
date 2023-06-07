@@ -18,10 +18,6 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-
-
-
-
         // Crear tabla Usuario
         String createTableUsuario = "CREATE TABLE Usuario (id INTEGER PRIMARY KEY, nombre TEXT, contraseña TEXT)";
         db.execSQL(createTableUsuario);
@@ -44,6 +40,11 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         String createTablePregunta = "CREATE TABLE Pregunta (id INTEGER PRIMARY KEY, enunciado TEXT, mundoId INTEGER, " +
                 "FOREIGN KEY(mundoId) REFERENCES Mundo(id))";
         db.execSQL(createTablePregunta);
+
+
+       // alterar tabla Pregunta
+       String alterTablePregunta = "ALTER TABLE Pregunta ADD COLUMN estado TEXT";
+        db.execSQL(alterTablePregunta);
 
         // Crear tabla Respuesta
         String createTableRespuesta = "CREATE TABLE Respuesta (id INTEGER PRIMARY KEY, respuesta TEXT, estado TEXT, preguntaId INTEGER, " +
@@ -96,6 +97,20 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
             activity.actualizarPuntos(puntos);
         }
     }
+
+    public void actualizarEstadoPregunta(int preguntaId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("estado", "respondido");
+
+        String selection = "id = ?";
+        String[] selectionArgs = { String.valueOf(preguntaId) };
+
+        db.update("Pregunta", values, selection, selectionArgs);
+        db.close();
+    }
+
 
     public Experiencia obtenerExperienciaPorUsuarioId(int usuarioId) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -183,9 +198,9 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         return registros.toString();
     }
 
-    public List<Pregunta> obtenerPreguntasPorMundoId(int mundoId) {
+    public List<Pregunta> listarTodasLasPreguntas() {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursorPreguntas = db.rawQuery("SELECT id, enunciado FROM Pregunta WHERE mundoId = ?", new String[]{String.valueOf(mundoId)});
+        Cursor cursorPreguntas = db.rawQuery("SELECT id, enunciado, estado FROM Pregunta", null);
 
         List<Pregunta> listaPreguntas = new ArrayList<>();
 
@@ -193,8 +208,60 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
             do {
                 int preguntaId = cursorPreguntas.getInt(0);
                 String enunciado = cursorPreguntas.getString(1);
+                String estadoPregunta = cursorPreguntas.getString(2);
+                Pregunta pregunta = new Pregunta(preguntaId, enunciado, estadoPregunta);
+                listaPreguntas.add(pregunta);
 
-                Pregunta pregunta = new Pregunta(preguntaId, enunciado);
+                Cursor cursorRespuestas = db.rawQuery("SELECT * FROM Respuesta WHERE preguntaId = ?", new String[]{String.valueOf(preguntaId)});
+                if (cursorRespuestas.moveToFirst()) {
+                    do {
+                        int respuestaId = cursorRespuestas.getInt(0);
+                        String respuesta = cursorRespuestas.getString(1);
+                        String estado = cursorRespuestas.getString(2);
+
+                        Respuesta respuestaObj = new Respuesta(respuestaId, respuesta, estado);
+                        pregunta.agregarRespuesta(respuestaObj);
+                    } while (cursorRespuestas.moveToNext());
+                }
+                cursorRespuestas.close();
+            } while (cursorPreguntas.moveToNext());
+        }
+        cursorPreguntas.close();
+        db.close();
+
+        return listaPreguntas;
+    }
+
+    public Mundo obtenerMundoPorId(int id){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursorMundos = db.rawQuery("SELECT * FROM Mundo WHERE id = " + id, null);
+        Mundo mundo = null;
+if (cursorMundos.moveToFirst()){
+
+    do {
+        int puntos = cursorMundos.getInt(1);
+        String nombre = cursorMundos.getString(2);
+         mundo = new Mundo(id,puntos,nombre);
+
+
+    }while (cursorMundos.moveToNext());
+
+}
+        return  mundo;}
+
+
+    public List<Pregunta> obtenerPreguntasPorMundoId(int mundoId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursorPreguntas = db.rawQuery("SELECT id, enunciado, estado FROM Pregunta WHERE mundoId = ?", new String[]{String.valueOf(mundoId)});
+
+        List<Pregunta> listaPreguntas = new ArrayList<>();
+
+        if (cursorPreguntas.moveToFirst()) {
+            do {
+                int preguntaId = cursorPreguntas.getInt(0);
+                String enunciado = cursorPreguntas.getString(1);
+                String estadoPregunta = cursorPreguntas.getString(2);
+                Pregunta pregunta = new Pregunta(preguntaId, enunciado, estadoPregunta);
                 listaPreguntas.add(pregunta);
 
                 Cursor cursorRespuestas = db.rawQuery("SELECT * FROM Respuesta WHERE preguntaId = ?", new String[]{String.valueOf(preguntaId)});

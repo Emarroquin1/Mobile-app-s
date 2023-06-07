@@ -22,30 +22,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <TextView
-            android:id="@+id/textViewNombre"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre: "
-            android:textStyle="bold" />
+            android:layout_marginBottom="319dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textViewApodo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Apodo: " />
+            <TextView
+                android:id="@+id/textViewNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre: "
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewPuntos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Puntos: " />
+            <TextView
+                android:id="@+id/textViewApodo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apodo" />
+
+            <TextView
+                android:id="@+id/textViewPuntos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/puntos" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="331dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-100dp"
+            android:layout_marginTop="-290dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="SELECCIONE UNA DIFICULTAD"
@@ -59,7 +65,7 @@
             android:layout_marginTop="100dp"
             android:layout_marginBottom="18dp"
             android:backgroundTint="#5F9A50"
-            android:text="@string/facil"
+            android:text="FACIL"
             android:onClick="Easy"
             android:textSize="20sp" />
 
@@ -70,7 +76,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp"
             android:backgroundTint="#DCB838"
-            android:text="Intermedio"
+            android:text="INTERMEDIO"
             android:onClick="Intermediate"
             android:textSize="20sp" />
 
@@ -81,9 +87,10 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="#CC3636"
-            android:text="@string/dificil"
+            android:text="DIFICIL"
             android:onClick="Hard"
             android:textSize="20sp" />
+
 
     </LinearLayout>
 

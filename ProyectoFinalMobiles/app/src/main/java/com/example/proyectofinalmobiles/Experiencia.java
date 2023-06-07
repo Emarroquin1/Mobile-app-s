@@ -1,6 +1,8 @@
 package com.example.proyectofinalmobiles;
 
-public class Experiencia {
+import java.io.Serializable;
+
+public class Experiencia implements Serializable {
     private int punto;
     private String apodo;
 
