@@ -7,39 +7,76 @@
     tools:context=".registro">
 
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#00B0FF"
         android:orientation="vertical"
         android:padding="16dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:context=".UserActivity">
+
+        <TextView
+            android:id="@+id/textViewTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="300dp"
+            android:gravity="center"
+            android:text="Registro"
+            android:textColor="@color/colortitle1"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewSubTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-10dp"
+            android:layout_marginTop="-200dp"
+            android:text="@string/llena_los_campos_y_registrate"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre" />
+            android:layout_marginTop="30dp"
+            android:hint="@string/nombre" />
 
         <EditText
             android:id="@+id/editTextContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:hint="@string/contrase_a"
+            android:layout_marginTop="30dp"
             android:inputType="textPassword" />
 
-        <Button
-            android:id="@+id/buttonGuardar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Guardar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/buttonVolver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Volver" />
+            <Button
+                android:id="@+id/buttonGuardar"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/guardar" />
+
+            <Button
+                android:id="@+id/buttonVolver"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/volver" />
+        </LinearLayout>
 
     </LinearLayout>
 
