@@ -53,6 +53,7 @@
                     android:layout_height="100px"
                     android:textColor="@color/white"
                     android:backgroundTint="#8FDFA000"
+                    android:layout_marginTop="40px"
                     android:text="Regresar" />
 
             </LinearLayout>
