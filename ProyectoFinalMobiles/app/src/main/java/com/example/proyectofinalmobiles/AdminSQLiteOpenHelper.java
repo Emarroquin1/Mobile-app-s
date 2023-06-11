@@ -37,7 +37,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(createTableMundo);
 
         // Crear tabla Pregunta
-        String createTablePregunta = "CREATE TABLE Pregunta (id INTEGER PRIMARY KEY, enunciado TEXT, mundoId INTEGER, " +
+        String createTablePregunta = "CREATE TABLE Pregunta (id INTEGER PRIMARY KEY, enunciado TEXT, mundoId INTEGER,estado TEXT, " +
                 "FOREIGN KEY(mundoId) REFERENCES Mundo(id))";
         db.execSQL(createTablePregunta);
 
