@@ -44,7 +44,7 @@ public class ActivityPreguntas extends AppCompatActivity {
 
         String puntoView ="Puntos: "+experiencia.getPunto();
         textViewPuntos.setText(puntoView);
-        textViewNombre.setText(user.getNombre());
+        textViewNombre.setText("Usuario: "+user.getNombre());
 
         String apodoView = "Apodo: "+experiencia.getApodo();
 
@@ -75,9 +75,9 @@ public class ActivityPreguntas extends AppCompatActivity {
             apodo="Avanzado";
         }else if(puntos>=60 && puntos<80){
             apodo="Experto";
-        }else if(puntos>=80 && puntos<100){
+        }else if(puntos>=80 && puntos<96){
             apodo="Genio";
-        }else if(puntos>=96){
+        }else if(puntos>=96 && puntos==95){
             apodo="Ingeniero";
         }
 
@@ -304,8 +304,8 @@ public class ActivityPreguntas extends AppCompatActivity {
                             actualizarExperiencia(true);
 
                     }else{
-                        Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en esta pregunta", Toast.LENGTH_SHORT).show();
 
+                        Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en esta pregunta", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
