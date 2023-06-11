@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/fondomath"
+        android:background="@drawable/fondomatematicas"
         tools:context=".LoginActivity">
 
 
@@ -28,7 +28,8 @@
             android:layout_marginBottom="100dp"
             android:gravity="center"
             android:text="INICIO DE SESIÓN"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colortitle1"
+      android:background="#6D000000"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -50,6 +51,7 @@
             android:textColorHint="@color/colortitle1"
             android:textColor="@color/colortitle1"
             android:hint="Nombre"
+            android:backgroundTint="#310C0B0B"
             android:minHeight="50dp"
             android:background="#272626"/>
 
@@ -61,6 +63,7 @@
             android:textColorHint="@color/colortitle1"
             android:textColor="@color/colortitle1"
             android:hint="Contraseña"
+            android:backgroundTint="#310C0B0B"
             android:inputType="textPassword"
             android:minHeight="50dp"
             android:background="#272626"/>
@@ -71,8 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="Iniciar sesión"
-            android:textColor="#000000"
-            android:backgroundTint="#FFFFFF"/>
+            android:textColor="@color/colortitle1"
+            android:backgroundTint="#59090808"/>
 
         <TextView
             android:id="@+id/textViewRegistro"

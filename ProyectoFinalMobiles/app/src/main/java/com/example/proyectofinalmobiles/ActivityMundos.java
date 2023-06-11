@@ -42,11 +42,14 @@ public class ActivityMundos extends AppCompatActivity {
         // Mostrar los datos en tus TextViews u otros elementos de la interfaz
         TextView textViewNombre = findViewById(R.id.textViewNombre);
         TextView textViewApodo = findViewById(R.id.textViewApodo);
+
         textViewPuntos = findViewById(R.id.textViewPuntos);
+        String puntoView ="Puntos: "+experiencia.getPunto();
+        textViewPuntos.setText(puntoView);
 
         textViewNombre.setText(user.getNombre());
-        textViewApodo.setText(experiencia.getApodo());
-        textViewPuntos.setText(String.valueOf(experiencia.getPunto()));
+        textViewApodo.setText("Apodo: "+experiencia.getApodo());
+
     }
 
     public void sendUser(){
@@ -59,6 +62,8 @@ public class ActivityMundos extends AppCompatActivity {
 
     public void sendUseRegresar(){
         intentSendRegresar = new Intent(ActivityMundos.this, ActivityDificultad.class);
+
+
         intentSendRegresar.putExtra("objExperiencia", experiencia);
         intentSendRegresar.putExtra("objUser", user);
     }

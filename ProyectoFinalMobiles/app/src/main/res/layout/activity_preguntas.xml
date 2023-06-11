@@ -94,12 +94,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Mundo tematica"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:background="#A9000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="25dp"
                 android:textColor="@color/colortitle1"
                 />
         </LinearLayout>
@@ -109,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
             android:textSize="20sp"
             android:textColor="@color/white"

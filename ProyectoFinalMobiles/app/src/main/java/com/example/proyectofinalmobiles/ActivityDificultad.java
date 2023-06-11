@@ -34,9 +34,15 @@ public void setUser(){
     TextView textViewApodo = findViewById(R.id.textViewApodo);
     TextView textViewPuntos = findViewById(R.id.textViewPuntos);
 
+    user.setNombre("Usuario: "+user.getNombre());
+
+
+    String puntoView ="Puntos: "+experiencia.getPunto();
+    textViewPuntos.setText(puntoView);
+
     textViewNombre.setText(user.getNombre());
-    textViewApodo.setText(experiencia.getApodo());
-    textViewPuntos.setText(String.valueOf(experiencia.getPunto()));
+    textViewApodo.setText("Apodo: "+experiencia.getApodo());
+
 }
 
 public void sendUser(){
@@ -45,6 +51,7 @@ public void sendUser(){
     intentSend.putExtra("objUser", user);
 }
     private void actualizarExperiencia() {
+
         int usuarioId = user.getId();
 
         // Obtener los puntos y apodo actuales del usuario
@@ -58,7 +65,13 @@ public void sendUser(){
 
         // Actualizar el TextView de los puntos en la interfaz
         TextView textViewPuntos = findViewById(R.id.textViewPuntos);
-        textViewPuntos.setText(String.valueOf(puntos));
+        String puntoView ="Puntos: "+experiencia.getPunto();
+        textViewPuntos.setText(puntoView);
+
+        TextView textViewApodo = findViewById(R.id.textViewApodo);
+
+        textViewApodo.setText("Apodo: "+experiencia.getApodo());
+
     }
 
     @Override

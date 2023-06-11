@@ -3,6 +3,7 @@ package com.example.proyectofinalmobiles;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,18 +36,21 @@ public class ActivityPreguntas extends AppCompatActivity {
         //obtener el usuario
         user = (Usuario) intentGet.getSerializableExtra("objUser");
         //obtener la experiencia
-        experiencia= (Experiencia) intentGet.getSerializableExtra("objExperiencia");
+        experiencia = (Experiencia) intentGet.getSerializableExtra("objExperiencia");
         // Mostrar los datos en tus TextViews u otros elementos de la interfaz
         TextView textViewNombre = findViewById(R.id.textViewNombre);
         TextView textViewApodo = findViewById(R.id.textViewApodo);
         TextView textViewPuntos = findViewById(R.id.textViewPuntos);
 
+        String puntoView ="Puntos: "+experiencia.getPunto();
+        textViewPuntos.setText(puntoView);
         textViewNombre.setText(user.getNombre());
-        textViewApodo.setText(experiencia.getApodo());
-        textViewPuntos.setText(String.valueOf(experiencia.getPunto()));
+
+        String apodoView = "Apodo: "+experiencia.getApodo();
+
+        textViewApodo.setText(apodoView);
+
     }
-
-
 
     private void actualizarExperiencia(boolean respuestaCorrecta) {
         int usuarioId = user.getId();
@@ -62,6 +66,20 @@ public class ActivityPreguntas extends AppCompatActivity {
         } else {
             puntos -= 1; // Restar 1 punto
         }
+        if(puntos<20){
+            apodo="Principiante";
+        }
+        else if(puntos>=20 && puntos<40){
+            apodo="Intermedio";
+        }else if(puntos>=40 && puntos<60){
+            apodo="Avanzado";
+        }else if(puntos>=60 && puntos<80){
+            apodo="Experto";
+        }else if(puntos>=80 && puntos<100){
+            apodo="Genio";
+        }else if(puntos>=100){
+            apodo="Ingeniero";
+        }
 
         // Actualizar la experiencia en la base de datos
         dbHelper.actualizarExperiencia(usuarioId, puntos, apodo);
@@ -69,7 +87,14 @@ public class ActivityPreguntas extends AppCompatActivity {
         experiencia = dbHelper.obtenerExperienciaPorUsuarioId(usuarioId);
         // Actualizar el TextView de los puntos en la interfaz
         TextView textViewPuntos = findViewById(R.id.textViewPuntos);
-        textViewPuntos.setText(String.valueOf(puntos));
+        TextView textViewApodo = findViewById(R.id.textViewApodo);
+
+        String puntoView ="Puntos: "+experiencia.getPunto();
+        textViewPuntos.setText(puntoView);
+
+        String apodoView = "Apodo: "+experiencia.getApodo();
+
+        textViewApodo.setText(apodoView);
     }
     public void sendUseRegresar(){
 
@@ -198,8 +223,11 @@ public class ActivityPreguntas extends AppCompatActivity {
 
                 if (respuesta.esCorrecta()) {
                     Toast.makeText(ActivityPreguntas.this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
-                    TextView textViewPuntos = findViewById(R.id.textViewPuntos);
-                    Integer puntos = Integer.parseInt(textViewPuntos.getText().toString());
+
+                    Integer puntos = experiencia.getPunto();
+
+                    MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.correcto);
+                    mediaPlayer.start();
 
                     if(puntos<limite && listaPreguntas.get(0).getEstadoPregunta().equals("Pendiente")){
                         actualizarExperiencia(true);
@@ -209,6 +237,8 @@ public class ActivityPreguntas extends AppCompatActivity {
                         Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.incorrecto);
+                    mediaPlayer.start();
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                     actualizarExperiencia(false);
                 }
@@ -224,6 +254,9 @@ public class ActivityPreguntas extends AppCompatActivity {
                     Toast.makeText(ActivityPreguntas.this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
                     TextView textViewPuntos = findViewById(R.id.textViewPuntos);
 
+                    MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.correcto);
+                    mediaPlayer.start();
+
                     if(experiencia.getPunto()<limite && listaPreguntas.get(1).getEstadoPregunta().equals("Pendiente")){
                         dbHelper.actualizarEstadoPregunta(listaPreguntas.get(1).getId());
                         listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(idMundo);
@@ -232,6 +265,8 @@ public class ActivityPreguntas extends AppCompatActivity {
                         Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.incorrecto);
+                    mediaPlayer.start();
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                     actualizarExperiencia(false);
                 }
@@ -245,7 +280,9 @@ public class ActivityPreguntas extends AppCompatActivity {
 
                 if (respuesta.esCorrecta()) {
                     Toast.makeText(ActivityPreguntas.this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
-                    TextView textViewPuntos = findViewById(R.id.textViewPuntos);
+
+                    MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.correcto);
+                    mediaPlayer.start();
 
                     if(experiencia.getPunto()<limite && listaPreguntas.get(2).getEstadoPregunta().equals("Pendiente")){
                         dbHelper.actualizarEstadoPregunta(listaPreguntas.get(2).getId());
@@ -256,6 +293,8 @@ public class ActivityPreguntas extends AppCompatActivity {
                         Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.incorrecto);
+                    mediaPlayer.start();
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                     actualizarExperiencia(false);
                 }
@@ -269,7 +308,8 @@ public class ActivityPreguntas extends AppCompatActivity {
 
                 if (respuesta.esCorrecta()) {
                     Toast.makeText(ActivityPreguntas.this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
-
+                    MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.correcto);
+                    mediaPlayer.start();
                     if(experiencia.getPunto()<limite && listaPreguntas.get(3).getEstadoPregunta().equals("Pendiente")){
                         dbHelper.actualizarEstadoPregunta(listaPreguntas.get(3).getId());
                         listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(idMundo);
@@ -278,6 +318,8 @@ public class ActivityPreguntas extends AppCompatActivity {
                         Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.incorrecto);
+                    mediaPlayer.start();
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                     actualizarExperiencia(false);
                 }
