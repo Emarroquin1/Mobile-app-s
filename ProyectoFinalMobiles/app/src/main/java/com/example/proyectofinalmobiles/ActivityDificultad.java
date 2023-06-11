@@ -109,5 +109,10 @@ public void sendUser(){
         });
 
     }
+    public void onBackPressed(){
+        Intent intent = new Intent(ActivityDificultad.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 }

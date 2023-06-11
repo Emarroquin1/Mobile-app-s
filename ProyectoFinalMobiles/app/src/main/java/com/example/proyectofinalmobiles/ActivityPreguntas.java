@@ -17,7 +17,7 @@ public class ActivityPreguntas extends AppCompatActivity {
 
     private AdminSQLiteOpenHelper dbHelper;
     private List<Pregunta> listaPreguntas;
-
+    private int count=0;
     public  Usuario  user;
     public   Experiencia  experiencia;
     private List<Respuesta> listaRespuesta;
@@ -125,16 +125,31 @@ public class ActivityPreguntas extends AppCompatActivity {
             textViewPregunta.setText(primeraPregunta.getEnunciado());
 
             listaRespuesta = primeraPregunta.getRespuestas();
+
+
+            listaRespuesta.get(0).setRespuesta("A) " + listaRespuesta.get(0).getRespuesta());
+            listaRespuesta.get(1).setRespuesta("B) " + listaRespuesta.get(1).getRespuesta());
+            listaRespuesta.get(2).setRespuesta("C) " + listaRespuesta.get(2).getRespuesta());
+
             RespuestaAdapter respuestaAdapter = new RespuestaAdapter(ActivityPreguntas.this, R.layout.item_respuesta, listaRespuesta);
+
+
 
             listViewRespuestas.setAdapter(respuestaAdapter);
         }
 
         if (listaPreguntas.size() > 1) {
             Pregunta segundaPregunta = listaPreguntas.get(1);
+
+
             textViewPregunta2.setText(segundaPregunta.getEnunciado());
 
             listaRespuesta = segundaPregunta.getRespuestas();
+
+            listaRespuesta.get(0).setRespuesta("A) " + listaRespuesta.get(0).getRespuesta());
+            listaRespuesta.get(1).setRespuesta("B) " + listaRespuesta.get(1).getRespuesta());
+            listaRespuesta.get(2).setRespuesta("C) " + listaRespuesta.get(2).getRespuesta());
+
             RespuestaAdapter respuestaAdapter2 = new RespuestaAdapter(ActivityPreguntas.this, R.layout.item_respuesta, listaRespuesta);
 
             listViewRespuestas2.setAdapter(respuestaAdapter2);
@@ -145,6 +160,9 @@ public class ActivityPreguntas extends AppCompatActivity {
             textViewPregunta3.setText(terceraPregunta.getEnunciado());
 
             listaRespuesta = terceraPregunta.getRespuestas();
+            listaRespuesta.get(0).setRespuesta("A) " + listaRespuesta.get(0).getRespuesta());
+            listaRespuesta.get(1).setRespuesta("B) " + listaRespuesta.get(1).getRespuesta());
+            listaRespuesta.get(2).setRespuesta("C) " + listaRespuesta.get(2).getRespuesta());
             RespuestaAdapter respuestaAdapter3 = new RespuestaAdapter(ActivityPreguntas.this, R.layout.item_respuesta, listaRespuesta);
 
             listViewRespuestas3.setAdapter(respuestaAdapter3);
@@ -155,6 +173,9 @@ public class ActivityPreguntas extends AppCompatActivity {
             textViewPregunta4.setText(cuartaPregunta.getEnunciado());
 
             listaRespuesta = cuartaPregunta.getRespuestas();
+            listaRespuesta.get(0).setRespuesta("A) " + listaRespuesta.get(0).getRespuesta());
+            listaRespuesta.get(1).setRespuesta("B) " + listaRespuesta.get(1).getRespuesta());
+            listaRespuesta.get(2).setRespuesta("C) " + listaRespuesta.get(2).getRespuesta());
             RespuestaAdapter respuestaAdapter4 = new RespuestaAdapter(ActivityPreguntas.this, R.layout.item_respuesta, listaRespuesta);
 
             listViewRespuestas4.setAdapter(respuestaAdapter4);

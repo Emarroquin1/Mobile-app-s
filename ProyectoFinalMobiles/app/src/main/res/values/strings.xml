@@ -9,8 +9,10 @@
     <string name="sexo">sexo</string>
     <string name="guardar">Guardar</string>
     <string name="volver">volver</string>
-    <string name="nombre">nombre</string>
+    <string name="Nombre">nombre</string>
     <string name="contrase_a">contraseña</string>
     <string name="llena_los_campos_y_resgistrate">llena los campos y resgistrate</string>
     <string name="llena_los_campos_y_registrate">Llena los campos y registrate</string>
+    <string name="nombre">Nombre</string>
+    <string name="contrase_a2">Contraseña</string>
 </resources>

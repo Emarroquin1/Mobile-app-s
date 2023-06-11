@@ -13,7 +13,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#00B0FF"
+        android:background="@drawable/fondodificultad"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,6 +32,7 @@
                 android:id="@+id/textViewNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colortitle1"
                 android:text="Nombre: "
                 android:textStyle="bold" />
 
@@ -39,57 +40,64 @@
                 android:id="@+id/textViewApodo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colortitle1"
                 android:text="@string/apodo" />
 
             <TextView
                 android:id="@+id/textViewPuntos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colortitle1"
                 android:text="@string/puntos" />
         </LinearLayout>
 
         <TextView
             android:layout_width="331dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-290dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="-300dp"
+            android:layout_marginBottom="55dp"
             android:gravity="center"
+            android:background="#A9000000"
+            android:textColor="@color/colortitle1"
             android:text="SELECCIONE UNA DIFICULTAD"
-            android:textSize="40sp"
-            android:textStyle="italic" />
+            android:textSize="23.5sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnEasy"
-            android:layout_width="250dp"
+            android:layout_width="220dp"
             android:layout_height="60dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="18dp"
-            android:backgroundTint="#5F9A50"
             android:text="FACIL"
+            android:backgroundTint="#2C000000"
+            android:textColor="#67ED06"
             android:onClick="Easy"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/btnIntermediate"
-            android:layout_width="250dp"
+            android:layout_width="230dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="#DCB838"
+            android:backgroundTint="#2C000000"
             android:text="INTERMEDIO"
+            android:textColor="#F6D91C"
             android:onClick="Intermediate"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/btnHard"
-            android:layout_width="250dp"
+            android:layout_width="220dp"
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="#CC3636"
+            android:backgroundTint="#2C000000"
+            android:textColor="#ED0606"
             android:text="DIFICIL"
             android:onClick="Hard"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
 
     </LinearLayout>

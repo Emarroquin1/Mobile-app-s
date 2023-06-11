@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00B0FF"
-    tools:context=".ActivityPreguntas">
+    android:background="@drawable/preguntasfondo2"
+    tools:context=".ActivityPreguntas"
+    >
 
 
 
@@ -28,7 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre:"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/colortitle1"/>
 
             <Space
                 android:layout_width="0dp"
@@ -39,6 +41,8 @@
                 android:id="@+id/btnRegresar"
                 android:layout_width="300px"
                 android:layout_height="100px"
+                android:textColor="@color/white"
+                android:backgroundTint="#8FDFA000"
                 android:text="Regresar" />
 
         </LinearLayout>
@@ -49,14 +53,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/apodo"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/colortitle1"/>
 
         <TextView
             android:id="@+id/textViewPuntos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/puntos"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/colortitle1"/>
 
 
     </LinearLayout>
@@ -65,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="5dp"
         tools:ignore="MissingConstraints"
         android:layout_marginTop="2dp">
 
@@ -88,11 +94,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Mundo tematica"
-                android:textSize="20sp"
+                android:textSize="22sp"
+                android:background="#A9000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="23dp"
+                android:textColor="@color/colortitle1"
                 />
         </LinearLayout>
 
@@ -101,16 +109,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
             android:textSize="20sp"
-            tools:ignore="NotSibling" />
+            android:textColor="@color/white"
+            tools:ignore="NotSibling"
+            android:background="@color/black"/>
 
         <ListView
             android:id="@+id/listViewRespuestas"
-            android:layout_width="385dp"
+            android:layout_width="150dp"
             android:layout_height="133dp"
+
             android:layout_marginStart="16dp"
-            tools:ignore="NotSibling" />
+            tools:ignore="NotSibling"
+            />
 
         <TextView
             android:id="@+id/textViewPregunta2"
@@ -118,11 +131,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textSize="20sp"
-            tools:ignore="NotSibling" />
+            android:textColor="@color/white"
+            android:layout_marginBottom="6dp"
+            tools:ignore="NotSibling"
+            android:background="@color/black"/>
 
         <ListView
             android:id="@+id/listViewRespuestas2"
-            android:layout_width="385dp"
+            android:layout_width="150dp"
             android:layout_height="133dp"
             android:layout_marginStart="16dp"
             tools:ignore="NotSibling" />
@@ -132,12 +148,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginBottom="6dp"
             android:textSize="20sp"
-            tools:ignore="NotSibling" />
+            android:textColor="@color/white"
+            tools:ignore="NotSibling"
+            android:background="@color/black"/>
 
         <ListView
             android:id="@+id/listViewRespuestas3"
-            android:layout_width="385dp"
+            android:layout_width="150dp"
             android:layout_height="133dp"
             android:layout_marginStart="16dp"
             tools:ignore="NotSibling" />
@@ -148,11 +167,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textSize="20sp"
-            tools:ignore="NotSibling" />
+            android:textColor="@color/white"
+            android:layout_marginBottom="6dp"
+            tools:ignore="NotSibling"
+            android:background="@color/black"/>
 
         <ListView
             android:id="@+id/listViewRespuestas4"
-            android:layout_width="385dp"
+            android:layout_width="150dp"
             android:layout_height="133dp"
             android:layout_marginStart="16dp"
             tools:ignore="NotSibling" />

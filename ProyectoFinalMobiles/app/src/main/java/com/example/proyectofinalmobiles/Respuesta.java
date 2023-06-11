@@ -5,6 +5,18 @@ public class Respuesta {
     private String respuesta;
     private String estado;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public Respuesta(int id, String respuesta, String estado) {
         this.id = id;
         this.respuesta = respuesta;

@@ -10,12 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:background="#80000000"
+        android:layout_marginTop="7dp">
 
         <TextView
             android:id="@+id/textViewRespuesta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colortitle1"
+
+            android:textSize="23dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <!-- Otros elementos de diseño para mostrar los datos de la respuesta -->

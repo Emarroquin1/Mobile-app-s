@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00B0FF"
+        android:background="@drawable/fondomath"
         android:orientation="vertical"
         android:padding="16dp"
         android:gravity="center"
@@ -20,41 +20,64 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".UserActivity">
 
-        <TextView
-            android:id="@+id/textViewTitulo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="300dp"
-            android:gravity="center"
-            android:text="Registro"
-            android:textColor="@color/colortitle1"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textViewSubTitulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="-10dp"
-            android:layout_marginTop="-200dp"
-            android:text="@string/llena_los_campos_y_registrate"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/textViewTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="REGISTRO"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/textViewSubTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/llena_los_campos_y_registrate"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="50dp"
+                android:background="#FF9A00" />
+
+        </LinearLayout>
+
 
         <EditText
             android:id="@+id/editTextNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:hint="@string/nombre" />
+            android:textColorHint="@color/colortitle1"
+            android:textColor="@color/colortitle1"
+            android:hint="@string/nombre"
+            android:minHeight="50dp"
+            android:background="#272626"/>
 
         <EditText
             android:id="@+id/editTextContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/contrase_a"
+            android:hint="@string/contrase_a2"
+            android:minHeight="50dp"
+            android:background="#272626"
             android:layout_marginTop="30dp"
-            android:inputType="textPassword" />
+            android:textColor="@color/colortitle1"
+            android:inputType="textPassword"
+            android:textColorHint="@color/colortitle1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,14 +91,22 @@
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
-                android:text="@string/guardar" />
+                android:textColor="@color/black"
+                android:text="@string/guardar"
+
+                android:backgroundTint="#FFFFFF"/>
 
             <Button
+
                 android:id="@+id/buttonVolver"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
-                android:text="@string/volver" />
+                android:text="@string/volver"
+                android:textColor="@color/black"
+                android:backgroundTint="#FAF7F7"/>
+
+
         </LinearLayout>
 
     </LinearLayout>

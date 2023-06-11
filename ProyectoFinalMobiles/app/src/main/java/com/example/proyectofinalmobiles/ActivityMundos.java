@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,7 +16,11 @@ public class ActivityMundos extends AppCompatActivity {
     private List<Pregunta> listaPreguntas;
     private AdminSQLiteOpenHelper dbHelper;
     private List<Respuesta> listaRespuesta;
-    Button buttonMundo1,buttonMundo2,buttonMundo3,buttonMundo4,btnRegresar;
+    ImageButton buttonMundo1,buttonMundo2,buttonMundo3,buttonMundo4;
+
+    Button btnRegresar;
+
+     ;
     int mundoId;
     public  Usuario  user;
     public   Experiencia  experiencia;
