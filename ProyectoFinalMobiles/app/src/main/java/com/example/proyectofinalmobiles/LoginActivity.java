@@ -41,6 +41,9 @@ public class LoginActivity extends AppCompatActivity {
 
         List<Pregunta> preguntas = dbHelper.listarTodasLasPreguntas();
         if(preguntas.isEmpty()){
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            String alterTablePregunta = "ALTER TABLE Pregunta ADD COLUMN estado TEXT";
+            db.execSQL(alterTablePregunta);
             dbHelper.borrarRegistros();
             insertarDatos();
         }
@@ -130,11 +133,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private int obtenerUsuarioId(String nombre) {
+
         int usuarioId = -1; // Valor predeterminado si no se encuentra el usuario
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-
 
         String[] projection = {"id"};
         String selection = "nombre = ?";
@@ -171,8 +173,7 @@ public class LoginActivity extends AppCompatActivity {
     private void insertarDatos() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         
-         //String alterTablePregunta = "ALTER TABLE Pregunta ADD COLUMN estado TEXT";
-         //db.execSQL(alterTablePregunta);
+
         // Obtener el ID del nivel con nombre 'Facil'
         Cursor cursor = db.rawQuery("SELECT id FROM Nivel WHERE nombre = 'Facil'", null);
         int nivelId = -1;
