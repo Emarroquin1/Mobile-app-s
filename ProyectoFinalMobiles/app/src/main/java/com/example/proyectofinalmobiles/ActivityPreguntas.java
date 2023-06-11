@@ -62,9 +62,9 @@ public class ActivityPreguntas extends AppCompatActivity {
 
         // Actualizar los puntos según la respuesta
         if (respuestaCorrecta) {
-            puntos += 1; // Sumar 1 punto
+            puntos += 2; // Sumar 1 punto
         } else {
-            puntos -= 1; // Restar 1 punto
+            puntos -= 2; // Restar 1 punto
         }
         if(puntos<20){
             apodo="Principiante";
@@ -77,7 +77,7 @@ public class ActivityPreguntas extends AppCompatActivity {
             apodo="Experto";
         }else if(puntos>=80 && puntos<100){
             apodo="Genio";
-        }else if(puntos>=100){
+        }else if(puntos>=96){
             apodo="Ingeniero";
         }
 
