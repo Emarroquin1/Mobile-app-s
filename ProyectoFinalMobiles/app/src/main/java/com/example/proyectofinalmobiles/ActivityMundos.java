@@ -47,7 +47,8 @@ public class ActivityMundos extends AppCompatActivity {
         String puntoView ="Puntos: "+experiencia.getPunto();
         textViewPuntos.setText(puntoView);
 
-        textViewNombre.setText(user.getNombre());
+        textViewNombre.setText("Usuario: "+user.getNombre());
+
         textViewApodo.setText("Apodo: "+experiencia.getApodo());
 
     }

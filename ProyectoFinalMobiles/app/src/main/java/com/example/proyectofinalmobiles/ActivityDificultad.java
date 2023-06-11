@@ -34,13 +34,11 @@ public void setUser(){
     TextView textViewApodo = findViewById(R.id.textViewApodo);
     TextView textViewPuntos = findViewById(R.id.textViewPuntos);
 
-    user.setNombre("Usuario: "+user.getNombre());
-
-
     String puntoView ="Puntos: "+experiencia.getPunto();
     textViewPuntos.setText(puntoView);
 
-    textViewNombre.setText(user.getNombre());
+    textViewNombre.setText("Usuario: "+user.getNombre());
+
     textViewApodo.setText("Apodo: "+experiencia.getApodo());
 
 }

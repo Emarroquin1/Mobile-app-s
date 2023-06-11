@@ -252,7 +252,7 @@ public class ActivityPreguntas extends AppCompatActivity {
 
                 if (respuesta.esCorrecta()) {
                     Toast.makeText(ActivityPreguntas.this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
-                    TextView textViewPuntos = findViewById(R.id.textViewPuntos);
+
 
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.correcto);
                     mediaPlayer.start();
@@ -310,13 +310,21 @@ public class ActivityPreguntas extends AppCompatActivity {
                     Toast.makeText(ActivityPreguntas.this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.correcto);
                     mediaPlayer.start();
-                    if(experiencia.getPunto()<limite && listaPreguntas.get(3).getEstadoPregunta().equals("Pendiente")){
-                        dbHelper.actualizarEstadoPregunta(listaPreguntas.get(3).getId());
-                        listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(idMundo);
-                        actualizarExperiencia(true);
-                    }else{
-                        Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
+                    if(listaPreguntas.get(3).getEstadoPregunta().equals("Pendiente")){
+
+                        if(experiencia.getPunto()<limite ){
+                            dbHelper.actualizarEstadoPregunta(listaPreguntas.get(3).getId());
+                            listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(idMundo);
+                            actualizarExperiencia(true);
+                        }else{
+                            Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en esta pregunta", Toast.LENGTH_SHORT).show();
+
                     }
+
+
                 } else {
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.incorrecto);
                     mediaPlayer.start();
