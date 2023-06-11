@@ -29,7 +29,7 @@ public class ActivityMundos extends AppCompatActivity {
     public Intent intentGet;
     public Integer dificultad;
 
-    public Integer limite, limiteMax;
+    public Integer limite;
     TextView textViewPuntos;
     public void setUser(){
 
@@ -91,23 +91,13 @@ public class ActivityMundos extends AppCompatActivity {
         if (dificultad == 1) {
 
             textViewDificultad.setText("FACIL");
-            limite=32;
             mundoId=1;
-
-
-
         } else if (dificultad == 2) {
-            mundoId=4;
-            limite=64;
-
-
+            mundoId=5;
             textViewDificultad.setText("INTERMEDIO");
 
         } else if (dificultad == 3) {
-            mundoId=8;
-            limite=96;
-
-
+            mundoId=9;
             textViewDificultad.setText("DIFICIL");
         }
 
@@ -115,14 +105,6 @@ public class ActivityMundos extends AppCompatActivity {
         buttonMundo1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-
-
-
-                    limite=limite-24;
-
                 int mundo1Id = mundoId; // Establece el ID del mundo deseado
                 intentSend.putExtra("id", mundo1Id);
                 intentSend.putExtra("limiteMundo", limite);
@@ -136,15 +118,7 @@ public class ActivityMundos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //Evaluar limite y tambien el usuario solo podra ganar esa cantidad de puntos
-
-
-
-
-
-                    limite=limite-16;
-
-
-                int mundoI2d = mundoId+2; // Establece el ID del mundo deseado
+                int mundoI2d = mundoId+1; // Establece el ID del mundo deseado
                 intentSend.putExtra("id", mundoI2d);
                 intentSend.putExtra("limiteMundo", limite);
                 //iniciar la ActivityMundos
@@ -156,8 +130,7 @@ public class ActivityMundos extends AppCompatActivity {
         buttonMundo3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                limite=limite-8;
-                int mundo3Id = mundoId+3; // Establece el ID del mundo deseado
+                int mundo3Id = mundoId+2; // Establece el ID del mundo deseado
                 intentSend.putExtra("id",mundo3Id);
                 intentSend.putExtra("limiteMundo", limite);
                 //intentSend.putExtra("limiteMaximo");
@@ -171,7 +144,7 @@ public class ActivityMundos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                int mundo4Id = mundoId+4; // Establece el ID del mundo deseado
+                int mundo4Id = mundoId+3; // Establece el ID del mundo deseado
                 intentSend.putExtra("id",mundo4Id);
                 intentSend.putExtra("limiteMundo", limite);
                 //iniciar la activityMundos

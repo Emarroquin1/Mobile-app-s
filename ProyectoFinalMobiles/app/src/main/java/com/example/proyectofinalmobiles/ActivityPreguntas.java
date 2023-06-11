@@ -223,7 +223,7 @@ public class ActivityPreguntas extends AppCompatActivity {
 
                     Toast.makeText(ActivityPreguntas.this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
 
-                    Integer puntos = experiencia.getPunto();
+
 
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.correcto);
                     mediaPlayer.start();
