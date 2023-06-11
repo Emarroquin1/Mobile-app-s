@@ -39,14 +39,18 @@ public class LoginActivity extends AppCompatActivity {
         dbHelper = new AdminSQLiteOpenHelper(this, "miBaseDeDatos", null, 1);
 
 
+        List<Pregunta> preguntas = dbHelper.listarTodasLasPreguntas();
+        if(preguntas.isEmpty()){
+            dbHelper.borrarRegistros();
+            insertarDatos();
+        }
 
-        dbHelper.borrarRegistros();
 
 
 
 
-       insertarDatos();
-       List<Pregunta> preguntas = dbHelper.listarTodasLasPreguntas();
+
+
 
         buttonIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override

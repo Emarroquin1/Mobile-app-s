@@ -98,11 +98,11 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void actualizarEstadoPregunta(int preguntaId) {
+    public void actualizarEstadoPregunta(int preguntaId, String estado) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("estado", "respondido");
+        values.put("estado", estado);
 
         String selection = "id = ?";
         String[] selectionArgs = { String.valueOf(preguntaId) };

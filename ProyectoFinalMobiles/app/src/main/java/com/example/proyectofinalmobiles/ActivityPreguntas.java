@@ -219,6 +219,8 @@ public class ActivityPreguntas extends AppCompatActivity {
                 Respuesta respuesta = listaRespuesta.get(position);
 
                 if (respuesta.esCorrecta()) {
+
+
                     Toast.makeText(ActivityPreguntas.this, "Respuesta correcta", Toast.LENGTH_SHORT).show();
 
                     Integer puntos = experiencia.getPunto();
@@ -226,17 +228,26 @@ public class ActivityPreguntas extends AppCompatActivity {
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.correcto);
                     mediaPlayer.start();
 
-                    if(puntos<limite && listaPreguntas.get(0).getEstadoPregunta().equals("Pendiente")){
+                    if(listaPreguntas.get(0).getEstadoPregunta().equals("Pendiente")){
+
+                        dbHelper.actualizarEstadoPregunta(listaPreguntas.get(0).getId(),"Respondido");
+
                         actualizarExperiencia(true);
-                        dbHelper.actualizarEstadoPregunta(listaPreguntas.get(0).getId());
+
                         listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(idMundo);
+
                     }else{
-                        Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en esta pregunta", Toast.LENGTH_SHORT).show();
+
                     }
+
+
                 } else {
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.incorrecto);
                     mediaPlayer.start();
+                    dbHelper.actualizarEstadoPregunta(listaPreguntas.get(0).getId(),"Pendiente");
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
+
                     actualizarExperiencia(false);
                 }
             }
@@ -254,16 +265,21 @@ public class ActivityPreguntas extends AppCompatActivity {
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.correcto);
                     mediaPlayer.start();
 
-                    if(experiencia.getPunto()<limite && listaPreguntas.get(1).getEstadoPregunta().equals("Pendiente")){
-                        dbHelper.actualizarEstadoPregunta(listaPreguntas.get(1).getId());
+                    if(listaPreguntas.get(1).getEstadoPregunta().equals("Pendiente")){
+
+                        dbHelper.actualizarEstadoPregunta(listaPreguntas.get(1).getId(),"Respondido");
                         listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(idMundo);
                         actualizarExperiencia(true);
+
                     }else{
-                        Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en esta pregunta", Toast.LENGTH_SHORT).show();
+
                     }
+
                 } else {
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.incorrecto);
                     mediaPlayer.start();
+                    dbHelper.actualizarEstadoPregunta(listaPreguntas.get(1).getId(),"Pendiente");
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                     actualizarExperiencia(false);
                 }
@@ -281,17 +297,21 @@ public class ActivityPreguntas extends AppCompatActivity {
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.correcto);
                     mediaPlayer.start();
 
-                    if(experiencia.getPunto()<limite && listaPreguntas.get(2).getEstadoPregunta().equals("Pendiente")){
-                        dbHelper.actualizarEstadoPregunta(listaPreguntas.get(2).getId());
-                        listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(idMundo);
-                        actualizarExperiencia(true);
+                    if(listaPreguntas.get(2).getEstadoPregunta().equals("Pendiente")){
+
+                            dbHelper.actualizarEstadoPregunta(listaPreguntas.get(2).getId(),"Respondido");
+                            listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(idMundo);
+                            actualizarExperiencia(true);
 
                     }else{
-                        Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en esta pregunta", Toast.LENGTH_SHORT).show();
+
                     }
+
                 } else {
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.incorrecto);
                     mediaPlayer.start();
+                    dbHelper.actualizarEstadoPregunta(listaPreguntas.get(2).getId(),"Pendiente");
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                     actualizarExperiencia(false);
                 }
@@ -309,14 +329,12 @@ public class ActivityPreguntas extends AppCompatActivity {
                     mediaPlayer.start();
                     if(listaPreguntas.get(3).getEstadoPregunta().equals("Pendiente")){
 
-                        if(experiencia.getPunto()<limite ){
-                            dbHelper.actualizarEstadoPregunta(listaPreguntas.get(3).getId());
+                            dbHelper.actualizarEstadoPregunta(listaPreguntas.get(3).getId(),"Respondido");
                             listaPreguntas = dbHelper.obtenerPreguntasPorMundoId(idMundo);
                             actualizarExperiencia(true);
-                        }else{
-                            Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en este mundo", Toast.LENGTH_SHORT).show();
-                        }
+
                     }else {
+
                         Toast.makeText(ActivityPreguntas.this, "Ya no puedes ganar mas puntos en esta pregunta", Toast.LENGTH_SHORT).show();
 
                     }
@@ -325,6 +343,7 @@ public class ActivityPreguntas extends AppCompatActivity {
                 } else {
                     MediaPlayer mediaPlayer = MediaPlayer.create(ActivityPreguntas.this, R.raw.incorrecto);
                     mediaPlayer.start();
+                    dbHelper.actualizarEstadoPregunta(listaPreguntas.get(3).getId(),"Pendiente");
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                     actualizarExperiencia(false);
                 }

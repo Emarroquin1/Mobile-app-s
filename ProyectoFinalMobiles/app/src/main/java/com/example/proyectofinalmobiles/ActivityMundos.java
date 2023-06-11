@@ -156,16 +156,7 @@ public class ActivityMundos extends AppCompatActivity {
         buttonMundo3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-
-
-
-
                 limite=limite-8;
-
-
                 int mundo3Id = mundoId+3; // Establece el ID del mundo deseado
                 intentSend.putExtra("id",mundo3Id);
                 intentSend.putExtra("limiteMundo", limite);
