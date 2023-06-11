@@ -167,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
     private void insertarDatos() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         
-         //String alterTablePregunta = "ALTER TABLE Pregunta ADD COLUMN estado TEXT";
+         String alterTablePregunta = "ALTER TABLE Pregunta ADD COLUMN estado TEXT";
          //db.execSQL(alterTablePregunta);
         // Obtener el ID del nivel con nombre 'Facil'
         Cursor cursor = db.rawQuery("SELECT id FROM Nivel WHERE nombre = 'Facil'", null);
