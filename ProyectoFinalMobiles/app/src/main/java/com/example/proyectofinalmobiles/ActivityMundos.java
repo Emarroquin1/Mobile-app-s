@@ -91,21 +91,21 @@ public class ActivityMundos extends AppCompatActivity {
         if (dificultad == 1) {
 
             textViewDificultad.setText("FACIL");
-            limite=20;
+            limite=32;
             mundoId=1;
 
 
 
         } else if (dificultad == 2) {
             mundoId=4;
-            limite=60;
+            limite=64;
 
 
             textViewDificultad.setText("INTERMEDIO");
 
         } else if (dificultad == 3) {
             mundoId=8;
-            limite=100;
+            limite=96;
 
 
             textViewDificultad.setText("DIFICIL");
@@ -116,14 +116,13 @@ public class ActivityMundos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(limite>20 ){
 
-                    limite=limite-30;
 
-                }else if(limite<=20){
 
-                    limite=limite-15;
-                }
+
+
+                    limite=limite-24;
+
                 int mundo1Id = mundoId; // Establece el ID del mundo deseado
                 intentSend.putExtra("id", mundo1Id);
                 intentSend.putExtra("limiteMundo", limite);
@@ -137,14 +136,13 @@ public class ActivityMundos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //Evaluar limite y tambien el usuario solo podra ganar esa cantidad de puntos
-                if(limite>20){
 
-                    limite=limite-20;
 
-                }else if(limite<=20){
 
-                    limite=limite-10;
-                }
+
+
+                    limite=limite-16;
+
 
                 int mundoI2d = mundoId+2; // Establece el ID del mundo deseado
                 intentSend.putExtra("id", mundoI2d);
@@ -159,14 +157,14 @@ public class ActivityMundos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(limite>20){
 
-                    limite=limite-10;
 
-                }else if(limite<=20){
 
-                    limite=limite-5;
-                }
+
+
+
+                limite=limite-8;
+
 
                 int mundo3Id = mundoId+3; // Establece el ID del mundo deseado
                 intentSend.putExtra("id",mundo3Id);

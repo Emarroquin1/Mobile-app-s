@@ -157,9 +157,6 @@ public class ActivityPreguntas extends AppCompatActivity {
             listaRespuesta.get(2).setRespuesta("C) " + listaRespuesta.get(2).getRespuesta());
 
             RespuestaAdapter respuestaAdapter = new RespuestaAdapter(ActivityPreguntas.this, R.layout.item_respuesta, listaRespuesta);
-
-
-
             listViewRespuestas.setAdapter(respuestaAdapter);
         }
 
