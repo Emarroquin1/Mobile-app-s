@@ -45,7 +45,6 @@ public class ActivityPreguntas extends AppCompatActivity {
         String puntoView ="Puntos: "+experiencia.getPunto();
         textViewPuntos.setText(puntoView);
         textViewNombre.setText("Usuario: "+user.getNombre());
-
         String apodoView = "Apodo: "+experiencia.getApodo();
 
         textViewApodo.setText(apodoView);
