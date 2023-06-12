@@ -38,20 +38,16 @@ public class LoginActivity extends AppCompatActivity {
 
         dbHelper = new AdminSQLiteOpenHelper(this, "miBaseDeDatos", null, 1);
 
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        List<Pregunta> preguntas = dbHelper.listarTodasLasPreguntas();
-        if(preguntas.isEmpty()){
-            SQLiteDatabase db = dbHelper.getReadableDatabase();
+        if(isTablaVacia(db,"Pregunta")){
+
             String alterTablePregunta = "ALTER TABLE Pregunta ADD COLUMN estado TEXT";
             db.execSQL(alterTablePregunta);
+
             dbHelper.borrarRegistros();
             insertarDatos();
         }
-
-
-
-
-
 
 
 
@@ -107,6 +103,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    public boolean isTablaVacia(SQLiteDatabase db, String nombreTabla) {
+        String query = "SELECT COUNT(*) FROM " + nombreTabla;
+        Cursor cursor = db.rawQuery(query, null);
+        int count = 0;
+
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+
+        cursor.close();
+        return count == 0;
+    }
     private Usuario obtenerUsuario(int usuarioId) {
         Usuario usuario = null;
 

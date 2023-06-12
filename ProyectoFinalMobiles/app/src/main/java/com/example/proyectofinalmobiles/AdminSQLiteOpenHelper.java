@@ -37,14 +37,14 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(createTableMundo);
 
         // Crear tabla Pregunta
-        String createTablePregunta = "CREATE TABLE Pregunta (id INTEGER PRIMARY KEY, enunciado TEXT, mundoId INTEGER,estado TEXT, " +
+        String createTablePregunta = "CREATE TABLE Pregunta (id INTEGER PRIMARY KEY, enunciado TEXT, mundoId INTEGER, " +
                 "FOREIGN KEY(mundoId) REFERENCES Mundo(id))";
         db.execSQL(createTablePregunta);
 
 
        // alterar tabla Pregunta
-       String alterTablePregunta = "ALTER TABLE Pregunta ADD COLUMN estado TEXT";
-        db.execSQL(alterTablePregunta);
+       //String alterTablePregunta = "ALTER TABLE Pregunta ADD COLUMN estado TEXT";
+       // db.execSQL(alterTablePregunta);
 
         // Crear tabla Respuesta
         String createTableRespuesta = "CREATE TABLE Respuesta (id INTEGER PRIMARY KEY, respuesta TEXT, estado TEXT, preguntaId INTEGER, " +
@@ -58,6 +58,9 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Nivel (nombre) VALUES ('Dificil')");
 
     }
+
+
+
     public int obtenerPuntosMundo(int mundoId) {
         SQLiteDatabase db = this.getReadableDatabase();
 
