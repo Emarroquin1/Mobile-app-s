@@ -9,6 +9,23 @@ public class Pregunta {
     private String enunciado;
 
     private String estadoPregunta;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setEnunciado(String enunciado) {
+        this.enunciado = enunciado;
+    }
+
+    public void setEstadoPregunta(String estadoPregunta) {
+        this.estadoPregunta = estadoPregunta;
+    }
+
+    public void setRespuestas(List<Respuesta> respuestas) {
+        this.respuestas = respuestas;
+    }
+
     private List<Respuesta> respuestas;
 
     public Pregunta(int id, String enunciado, String estadoPregunta) {

@@ -76,7 +76,7 @@ public class ActivityPreguntas extends AppCompatActivity {
             apodo="Experto";
         }else if(puntos>=80 && puntos<96){
             apodo="Genio";
-        }else if(puntos>=96 && puntos==95){
+        }else if(puntos>=96 && puntos==94){
             apodo="Ingeniero";
         }
 
@@ -248,6 +248,7 @@ public class ActivityPreguntas extends AppCompatActivity {
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
 
                     actualizarExperiencia(false);
+                    listaPreguntas.get(0).setEstadoPregunta("Pendiente");
                 }
             }
         });
@@ -281,6 +282,7 @@ public class ActivityPreguntas extends AppCompatActivity {
                     dbHelper.actualizarEstadoPregunta(listaPreguntas.get(1).getId(),"Pendiente");
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                     actualizarExperiencia(false);
+                    listaPreguntas.get(1).setEstadoPregunta("Pendiente");
                 }
             }
         });
@@ -312,6 +314,7 @@ public class ActivityPreguntas extends AppCompatActivity {
                     mediaPlayer.start();
                     dbHelper.actualizarEstadoPregunta(listaPreguntas.get(2).getId(),"Pendiente");
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
+                    listaPreguntas.get(2).setEstadoPregunta("Pendiente");
                     actualizarExperiencia(false);
                 }
             }
@@ -345,6 +348,7 @@ public class ActivityPreguntas extends AppCompatActivity {
                     dbHelper.actualizarEstadoPregunta(listaPreguntas.get(3).getId(),"Pendiente");
                     Toast.makeText(ActivityPreguntas.this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                     actualizarExperiencia(false);
+                    listaPreguntas.get(3).setEstadoPregunta("Pendiente");
                 }
             }
         });
