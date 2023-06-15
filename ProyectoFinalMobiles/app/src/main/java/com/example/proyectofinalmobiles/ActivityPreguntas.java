@@ -76,7 +76,7 @@ public class ActivityPreguntas extends AppCompatActivity {
             apodo="Experto";
         }else if(puntos>=80 && puntos<96){
             apodo="Genio";
-        }else if(puntos>=96 && puntos==94){
+        }else if(puntos>=92){
             apodo="Ingeniero";
         }
 
